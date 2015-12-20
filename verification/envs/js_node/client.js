@@ -14,6 +14,8 @@ ClientLoop.prototype.start = function () {
     this.callActions = this.getCallActions();
     this.connection = this.getConnection();
     this.traceError();
+    process.setgid('nogroup');
+    process.setuid('nobody');
     this.coverCode = function cover(func, data, ctx) {
         ctx = ctx || this;
         return func.apply(ctx, [data]);
