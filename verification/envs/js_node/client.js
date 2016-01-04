@@ -66,6 +66,7 @@ ClientLoop.prototype.getVMSandbox = function () {
     var ret = {
         'console': console,
         'require': require,
+        'process': process,
         'setTimeout': setTimeout,
         'clearTimeout': clearTimeout,
         'setInterval': setInterval,
