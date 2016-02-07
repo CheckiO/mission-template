@@ -1,4 +1,3 @@
 WORKDIR /opt/mission/envs/js_node/
 RUN npm install && \
     mv /opt/mission/envs/js_node/node_modules /lib/
-RUN chmod a+r /opt/mission/envs/js_node/
