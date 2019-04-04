@@ -1,4 +1,5 @@
 from .base import BaseHandler
+import sys
 
 
 class SimplePrintHandler(BaseHandler):
@@ -14,6 +15,8 @@ class SimplePrintHandler(BaseHandler):
             print('RESULT:SUCCESS')
         else:
             print('RESULT:INCOMPLETE')
+        sys.exit(0)
+
 
     def handler_stdout(self, line, request_id, stream_r):
         print(line, end='')
