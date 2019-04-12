@@ -1,1 +1,0 @@
-checkio_executor_python

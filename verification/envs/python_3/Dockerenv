@@ -1,1 +1,1 @@
-RUN pip3.4 install -r /opt/mission/envs/{{env}}/requirements.txt
+RUN pip install -r /opt/mission/envs/{{env}}/requirements.txt

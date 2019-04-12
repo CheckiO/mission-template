@@ -17,4 +17,4 @@
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 
-python3 $SCRIPTPATH/main.py $1 $2
+python $SCRIPTPATH/main.py $1 $2
