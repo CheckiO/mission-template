@@ -1,4 +1,4 @@
-FROM checkio/mission_base:2015.08.12
+FROM checkio/mission_base
 MAINTAINER Igor Lubimov <igor@checkio.org>
 
 COPY envs /opt/mission/envs
