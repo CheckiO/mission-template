@@ -1,11 +1,13 @@
 import logging
 import signal
 import sys
+import os
 
 from tornado.ioloop import IOLoop
 from referee import Referee
 
 from logs import init_logging
+import sentry_sdk
 
 
 if __name__ == "__main__":
@@ -23,6 +25,11 @@ if __name__ == "__main__":
                 'handlers': ['console'],
             }
         })
+
+    if os.getenv('EMPIRE_SENTRY_DSN'):
+        sentry_sdk.init(
+            dsn=os.getenv('EMPIRE_SENTRY_DSN')
+        )
 
     logger = logging.getLogger()
     logger.info("START Host:{} PORT:{} CONNECTION_ID:{} DOCKER_ID:{}".format(

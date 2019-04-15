@@ -36,17 +36,14 @@ def init_logging(log_level, config=None):
             },
             'std_split': {
                 '()': StreamSplitHandler,
-            },
-            # 'sentry': {
-            #     'level': 'ERROR',
-            #     'class': 'raven.handlers.logging.SentryHandler',
-            #     'dsn': os.getenv('SENTRY_DSN'),
-            # },
+            }
         },
         'loggers': {
         },
         'root': {
-            'handlers': ['std_split', 'sentry'],
+            'handlers': [
+                'std_split'
+                ],
         },
     }
 
