@@ -1,5 +1,6 @@
 "use strict";
 var vm = require('vm');
+var ts = require("typescript");
 
 function ClientLoop(port, environment_id) {
     this.connection_port = port;
@@ -137,7 +138,13 @@ ClientLoop.prototype.actionRunCode = function (data) {
     this.vmContext = this.getVMContext();
     var result;
     try {
-        result = vm.runInContext(data.code, this.vmContext);
+        var compilerOptions = { module: ts.ModuleKind.CommonJS, inlineSourceMap: true };
+
+        var transplite = ts.transpileModule(data.code, {
+          compilerOptions: compilerOptions,
+          moduleName: "userModule"
+        });
+        result = vm.runInContext(transplite.outputText, this.vmContext);
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
