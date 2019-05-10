@@ -1,6 +1,5 @@
 "use strict";
 var vm = require('vm');
-var util = require('util');
 
 function ClientLoop(port, environment_id) {
     this.connection_port = port;
