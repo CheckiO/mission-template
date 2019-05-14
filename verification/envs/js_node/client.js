@@ -170,10 +170,13 @@ ClientLoop.prototype.actionRunCode = function (data) {
 ClientLoop.prototype.actionRunFunction = function (data) {
     var result, var_result;
     try {
-        vm.runInContext(this.TMP_VAR + ' = ' + JSON.stringify(data.function_args), this.vmContext);
-        var_result = this.vmContext[this.TMP_VAR];
-        delete this.vmContext[this.TMP_VAR];
-        result = this.coverCode(this.vmContext[data.function_name], var_result);
+        // vm.runInContext(this.TMP_VAR + ' = ' + JSON.stringify(data.function_args), this.vmContext);
+        // var_result = this.vmContext[this.TMP_VAR];
+        // delete this.vmContext[this.TMP_VAR];
+        if (!this.vmContext[data.function_name]) {
+            throw new Error('Function ' + data.function_name + ' not found. Maybe you need to use export');
+        }
+        result = this.coverCode(this.vmContext[data.function_name], data.function_args);
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
