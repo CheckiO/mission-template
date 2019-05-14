@@ -43,7 +43,7 @@ ClientLoop.prototype.consoleErrorTraceback = function (err) {
     for (i = 0; i < lines.length; i += 1) {
         line = lines[i].trim();
         if (line.slice(0, 3) === 'at ') {
-            if (line.search('userModule') !== -1) {
+            if (line.search('module.ts') !== -1) {
                 console.error(lines[i]);
                 from_vm = true;
             } else if (this.debug) {
