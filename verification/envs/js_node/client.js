@@ -153,7 +153,7 @@ ClientLoop.prototype.actionRunCode = function (data) {
           compilerOptions: compilerOptions,
           moduleName: "userModule"
         });
-        fs.writeFileSync("userModule.js", res1.outputText);
+        fs.writeFileSync("userModule.js", transplite.outputText);
         this.vmContext = require("./userModule");
     } catch (err) {
         this.consoleErrorTraceback(err);
