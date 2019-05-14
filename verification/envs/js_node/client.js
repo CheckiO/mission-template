@@ -1,6 +1,12 @@
 "use strict";
 var vm = require('vm');
 var ts = require("typescript");
+var fs = require("fs");
+
+require('source-map-support').install({
+   environment: 'node',
+   hookRequire: true,
+})
 
 function ClientLoop(port, environment_id) {
     this.connection_port = port;
@@ -37,7 +43,7 @@ ClientLoop.prototype.consoleErrorTraceback = function (err) {
     for (i = 0; i < lines.length; i += 1) {
         line = lines[i].trim();
         if (line.slice(0, 3) === 'at ') {
-            if (line.search('evalmachine') !== -1) {
+            if (line.search('userModule') !== -1) {
                 console.error(lines[i]);
                 from_vm = true;
             } else if (this.debug) {
@@ -138,13 +144,17 @@ ClientLoop.prototype.actionRunCode = function (data) {
     this.vmContext = this.getVMContext();
     var result;
     try {
-        var compilerOptions = { module: ts.ModuleKind.CommonJS, inlineSourceMap: true };
+        var compilerOptions = { 
+            module: ts.ModuleKind.CommonJS, 
+            inlineSourceMap: true 
+        };
 
         var transplite = ts.transpileModule(data.code, {
           compilerOptions: compilerOptions,
           moduleName: "userModule"
         });
-        result = vm.runInContext(transplite.outputText, this.vmContext);
+        fs.writeFileSync("userModule.js", res1.outputText);
+        this.vmContext = require("./userModule");
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
@@ -153,7 +163,7 @@ ClientLoop.prototype.actionRunCode = function (data) {
     }
     return {
         'status': 'success',
-        'result': result
+        'result': ''
     };
 };
 
