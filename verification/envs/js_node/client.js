@@ -20,6 +20,8 @@ ClientLoop.prototype.start = function () {
     this.callActions = this.getCallActions();
     this.connection = this.getConnection();
     this.traceError();
+    fs.writeFileSync("userModule.js", '');
+    fs.chmod("userModule.js", 0o777);
     process.setgid('nogroup');
     process.setuid('nobody');
     this.coverCode = function cover(func, data, ctx) {
