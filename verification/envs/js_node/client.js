@@ -149,9 +149,9 @@ ClientLoop.prototype.actionRunCode = function (data) {
            noEmitOnError: true,
            inlineSourceMap: true,
            downlevelIteration: true,
-           baseUrl: '/lib/node_modules'
+           baseUrl: '/lib/'
         }
-        let program = ts.createProgram(['userModule.ts'], options);
+        let program = ts.createProgram(['userModule.ts']);
         let emitResult = program.emit();
 
         let allDiagnostics = ts
