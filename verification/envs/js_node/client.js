@@ -144,7 +144,12 @@ ClientLoop.prototype.actionRunCode = function (data) {
     try {
         fs.writeFileSync("userModule.ts", data.code);
         const options = {
-           project: '.'
+           module: ts.ModuleKind.CommonJS,
+           target: ts.ScriptTarget.ES5,
+           noEmitOnError: true,
+           inlineSourceMap: true,
+           downlevelIteration: true,
+           baseUrl: '/lib/node_modules'
         }
         let program = ts.createProgram(['userModule.ts'], options);
         let emitResult = program.emit();
