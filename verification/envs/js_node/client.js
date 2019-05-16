@@ -167,7 +167,7 @@ ClientLoop.prototype.actionRunCode = function (data) {
                 "\n"
               );
               console.error(
-                `(${line + 1},${character + 1}): ${message}`
+                `${line + 1},${character + 1}: ${message}`
               );
             } else {
               console.error(
