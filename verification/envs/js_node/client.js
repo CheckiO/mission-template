@@ -148,15 +148,12 @@ ClientLoop.prototype.actionRunCode = function (data) {
            target: ts.ScriptTarget.ES5,
            noEmitOnError: true,
            inlineSourceMap: true,
-           downlevelIteration: true,
-           baseUrl: '/lib/'
+           downlevelIteration: true
         }
         let program = ts.createProgram(['userModule.ts']);
         let emitResult = program.emit();
 
-        let allDiagnostics = ts
-            .getPreEmitDiagnostics(program)
-            .concat(emitResult.diagnostics);
+        let allDiagnostics = emitResult.diagnostics;
 
         allDiagnostics.forEach(diagnostic => {
             if (diagnostic.file) {
