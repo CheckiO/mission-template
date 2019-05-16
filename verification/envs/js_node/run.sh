@@ -6,4 +6,6 @@ cd $SCRIPTPATH
 export NODE_PATH=/lib/node_modules/:$SCRIPTPATH
 touch userModule.js
 chmod a+rw userModule.js
+touch userModule.ts
+chmod a+rw userModule.ts
 node --harmony main.js $1 $2

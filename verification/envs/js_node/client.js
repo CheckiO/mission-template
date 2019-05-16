@@ -141,20 +141,41 @@ ClientLoop.prototype.getCallActions = function () {
 };
 
 ClientLoop.prototype.actionRunCode = function (data) {
-    this.vmContext = this.getVMContext();
-    var result;
     try {
-        var compilerOptions = { 
-            module: ts.ModuleKind.CommonJS, 
-            inlineSourceMap: true 
-        };
+        fs.writeFileSync("userModule.ts", data.code);
+        const options = {
+           module: ts.ModuleKind.CommonJS,
+           noEmitOnError: true,
+           inlineSourceMap: true
+        }
+        let program = ts.createProgram(['userModule.ts'], options);
+        let emitResult = program.emit();
 
-        var transplite = ts.transpileModule(data.code, {
-          compilerOptions: compilerOptions,
-          moduleName: "userModule"
-        });
-        fs.writeFileSync("userModule.js", transplite.outputText);
-        this.vmContext = require("./userModule");
+        let allDiagnostics = ts
+            .getPreEmitDiagnostics(program)
+            .concat(emitResult.diagnostics);
+
+        allDiagnostics.forEach(diagnostic => {
+            if (diagnostic.file) {
+              let { line, character } = diagnostic.file.getLineAndCharacterOfPosition(
+                  diagnostic.start
+              );
+              let message = ts.flattenDiagnosticMessageText(
+                diagnostic.messageText,
+                "\n"
+              );
+              console.error(
+                `(${line + 1},${character + 1}): ${message}`
+              );
+            } else {
+              console.error(
+                `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`
+              );
+            }
+          });
+        if (!emitResult.emitSkipped) {
+            this.vmContext = require("./userModule");
+        }
     } catch (err) {
         this.consoleErrorTraceback(err);
         return {
