@@ -150,7 +150,7 @@ ClientLoop.prototype.actionRunCode = function (data) {
            inlineSourceMap: true,
            downlevelIteration: true
         }
-        let program = ts.createProgram(['userModule.ts']);
+        let program = ts.createProgram(['userModule.ts'], options);
         let emitResult = program.emit();
 
         let allDiagnostics = emitResult.diagnostics;
