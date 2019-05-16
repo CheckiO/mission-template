@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "noEmitOnError": true,
+        "inlineSourceMap": true,
+        "downlevelIteration": true,
+        "baseUrl": "/lib"
+    }
+}
