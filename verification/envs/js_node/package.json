@@ -5,7 +5,9 @@
   "devDependencies": {
     "optimist": "^0.6.1",
     "typescript": "^3.4.5",
-    "source-map-support": "^0.5.12",
+    "source-map-support": "^0.5.12"
+  },
+  "dependencies": {
     "@types/node": "^12.0.2"
   }
 }
