@@ -1,2 +1,3 @@
 replace:
 - requirements.txt
+- Dockerfile

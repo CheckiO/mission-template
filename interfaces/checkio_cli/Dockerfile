@@ -1,0 +1,1 @@
+FROM checkio/cli_interface:0.1
