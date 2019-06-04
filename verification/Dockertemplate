@@ -9,4 +9,4 @@ RUN pip3 install -r /opt/mission/requirements.txt
 
 {{env_instructions}}
 
-ENTRYPOINT ["python3", "/opt/mission/src/main.py"]
+ENTRYPOINT ["python3", "-u", "/opt/mission/src/main.py"]
