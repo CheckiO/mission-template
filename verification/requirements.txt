@@ -1,4 +1,4 @@
 coloredlogs==1.0.1
-tornado==5.0.2
+tornado==6.3.2
 sentry-sdk==0.9.0
 -e git+https://github.com/Checkio/checkio-referee.git#egg=checkio-referee
